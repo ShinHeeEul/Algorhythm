@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{layout/monaco_header::headerFragment}"></th:block>
+<body>
+    <th:block th:replace="~{layout/default_layout::navi}"></th:block>
+
+    <div id="container">
+        <div id="left-box">
+            <div>
+                <h2 id="monaco-title" th:text="${title}">알고리즘 제목</h2>
+            </div>
+            <div id = "markdown-content">
+            </div>
+        </div>
+        <div id="right-box">
+            <div id="monaco-editor">
+                <div id="monaco"></div>
+            </div>
+            <h4 style="margin-top:0.1rem;margin-bottom:0.1rem;background-color:#263747;padding:0.4rem;">실행 결과</h4>
+            <div id="monaco-answer">
+                실행 결과는 여기에 표시가 됩니다.
+            </div>
+        </div>
+    </div>
+    <nav class="nav2" id="monaco-footer">
+        <ul>
+            <li>
+                <button id="algorithmBtn">알고리즘</button>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <button id="resetBtn">초기화</button>
+            </li>
+            <li>
+                <button id="submitBtn">제출 후 채점하기</button>
+            </li>
+        </ul>
+    </nav>
+
+    <script th:inline="javascript">
+        function setEditor(inputValue, inputLanguage){
+    return {
+        value: inputValue,
+        language: inputLanguage,
+        theme: "vs-dark",
+        lineNumbers: 'on',
+        glyphMargin: false,
+        vertical: 'auto',
+        horizontal: 'auto',
+        verticalScrollbarSize: 10,
+        horizontalScrollbarSize: 10,
+        scrollBeyondLastLine: true,
+        readOnly: false,
+        automaticLayout: true,
+        minimap: {
+            enabled: false
+        },
+        lineHeight: 19
+    };
+}
+
+// Monaco Editor에서 현재 편집 중인 코드 가져오기
+function getCurrentCode() {
+    const editor = monaco.editor.getModels()[0];
+    return editor.getValue();
+}
+
+// 에디터 초기화 함수
+function initializeEditor() {
+        const storedCode = localStorage.getItem([[${title}]]);
+        const container = document.getElementById("monaco");
+        container.innerHTML = ''; // 이전 에디터 삭제
+
+        const monaco_test = monaco.editor.create(
+            container,
+            setEditor(storedCode || [[${value}]], [[${language}]])
+        );
+
+    // 제출 버튼 클릭 이벤트 처리
+    $('#submitBtn').click(function() {
+        const code = getCurrentCode();
+        sendCodeToServer(code);
+    });
+
+    $('#resetBtn').one('click', function () {
+    const shouldReset = confirm("정말 초기화하시겠습니까?");
+    if (shouldReset) {
+        const storedCode = localStorage.getItem([[${title}]]);
+        if (storedCode) {
+            localStorage.removeItem([[${title}]]);
+        }
+        monaco_test.dispose();
+        initializeEditor();
+    }
+    });
+}
+
+// 서버로 코드 비동기적으로 전송
+function sendCodeToServer(code) {
+    $.ajax({
+        type: "POST",
+        url: "/monaco/receive",
+        data: {
+            code: code
+        },
+        success: function(response) {
+            console.log("서버 응답:", response);
+            // 필요에 따라 응답을 처리하거나 다른 동작 수행
+        },
+        error: function(error) {
+            console.error("에러 발생:", error);
+        }
+    });
+}
+
+ // 페이지 로드 후 실행되도록 설정
+        document.addEventListener('DOMContentLoaded', function () {
+// 초기화 함수 호출
+initializeEditor();
+
+    // Markdown 파일의 경로
+    const markdownFilePath = [[${content}]];
+
+    // showdown.js를 사용하여 Markdown을 HTML로 변환
+    fetch(markdownFilePath)
+      .then(response => response.text())
+      .then(markdownContent => {
+        const converter = new showdown.Converter();
+        const htmlContent = converter.makeHtml(markdownContent);
+
+        document.getElementById('markdown-content').innerHTML = htmlContent;
+      });
+    });
+
+        // 페이지 나갈 때 코드 저장
+      window.addEventListener("beforeunload", function () {
+        const code = getCurrentCode();
+        localStorage.setItem([[${title}]], code);
+      });
+    </script>
+</body>
+</html>

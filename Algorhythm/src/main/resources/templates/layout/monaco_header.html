@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="headerFragment">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="UTF-8">
+        <title>Algorhythm</title>
+        <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
+        <link rel="stylesheet" data-name="vs/editor/editor.main"
+              th:href="@{/static/node_modules/monaco-editor/min/vs/editor/editor.main.css}"/>
+        <script th:src="@{/static/node_modules/jquery/dist/jquery.js}"></script>
+        <script>var require = {paths: {'vs': '../node_modules/monaco-editor/min/vs'}};</script>
+        <script th:src="@{/static/node_modules/monaco-editor/min/vs/loader.js}"></script>
+        <script th:src="@{/static/node_modules/monaco-editor/min/vs/editor/editor.main.nls.js}"></script>
+        <script th:src="@{/static/node_modules/monaco-editor/min/vs/editor/editor.main.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}" />
+
+    </head>
+</th:block>
+</html>

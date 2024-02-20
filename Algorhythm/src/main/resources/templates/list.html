@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{layout/monaco_header::headerFragment}"></th:block>
+<body>
+<th:block th:replace="~{layout/default_layout::navi}"></th:block>
+<div id="container" style="flex-direction: column;align-items: stretch;">
+    <div th:each="item : ${list}">
+        <a th:href="@{/monaco/{id}(id=${item.id})}" th:text="${item.name}">목록</a>
+    </div>
+    </ul>
+
+</div>
+</body>
+</html>

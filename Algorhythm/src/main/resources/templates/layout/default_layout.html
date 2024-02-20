@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="layout/header::headerFragment"></th:block>
+<body>
+<th:block th:fragment="navi">
+    <nav class="nav2" id="monaco-header">
+        <a href="#" th:onclick="|location.href='@{/}'|">Algorhythm</a>
+    <!--
+        <ul>
+            <li><a href="/add">문제 풀기</a></li>
+            <li><a href="/quiz/random">랜덤 문제 풀기</a></li>
+        </ul>
+    -->
+    </nav>
+</th:block>
+</body>
+</html>
