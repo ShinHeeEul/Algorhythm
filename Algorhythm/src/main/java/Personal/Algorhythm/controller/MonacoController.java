@@ -22,13 +22,11 @@ public class MonacoController {
 
     @GetMapping("/{id}")
     public String monaco(@PathVariable("id") Long id, Model model) {
-        if(id == 0L) {
-            String url = "src\\main\\resources\\static\\algorithm\\union_find\\UnionFind";
-            model.addAttribute("title", "Union-Find");
-            model.addAttribute("content", "../static/algorithm/union_find/UnionFind.md");
-            model.addAttribute("value", IOUtils.getFile(url + ".java"));
+        String fileName = IOUtils.getIdToFileName(id);
+            model.addAttribute("title", fileName);
+            model.addAttribute("content", IOUtils.getMdFileUrl(fileName));
+            model.addAttribute("value", IOUtils.getJavaFile(fileName));
             model.addAttribute("language", "java");
-        }
 
         return "monaco";
     }
