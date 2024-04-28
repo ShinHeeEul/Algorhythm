@@ -1,4 +1,5 @@
- 컴퓨터 과학 분야에서 서로소 집합(disjoint-set) 자료 구조, 또는 합집합-찾기(union–find) 자료 구조, 병합-찾기 집합(merge–find set)은 많은 서로소 부분 집합들로 나눠진 원소들에 대한 정보를 저장하고 조작하는 자료 구조이다. 서로소 집합 자료 구조는 두 개의 유용한 연산을 제공한다:
+# Union-Find 
+컴퓨터 과학 분야에서 서로소 집합(disjoint-set) 자료 구조, 또는 합집합-찾기(union–find) 자료 구조, 병합-찾기 집합(merge–find set)은 많은 서로소 부분 집합들로 나눠진 원소들에 대한 정보를 저장하고 조작하는 자료 구조이다. 서로소 집합 자료 구조는 두 개의 유용한 연산을 제공한다:
 
 ![img.png](../static/algorithm/UnionFind/img.png)
 
