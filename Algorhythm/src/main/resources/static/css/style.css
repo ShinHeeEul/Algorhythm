@@ -43,18 +43,6 @@ a{
     font-size:15px
 }
 
-#monaco-header>ul {
-  float: right;
-}
-
-#monaco-footer {
-    align-items: stretch;
-}
-
-#monaco-footer>ul {
-    float: left;
-}
-
 .nav2>ul li {
   float: left;
   padding: 0.5rem;
@@ -111,19 +99,6 @@ button:active {
   background-color: #0053f4;
 }
 
-/*여기서부터 새거*/
-#monaco-editor {
-    height: 60%;
-    width: 100%;
-}
-
-#monaco-answer {
-    display: flex;
-    align-content: flex-start;
-    height: 40%;
-    width: 100%;
-    background-color: #263747;
-}
 
 #markdown-content {
     padding: 0rem 2rem 2rem 2rem;
@@ -158,10 +133,6 @@ button:active {
     background-color: #00ff0000;
 }
 
-#monaco-title {
-   margin-left: 1rem;
-}
-
 #right-box {
     flex-direction: column;
     align-items: stretch;
@@ -169,11 +140,6 @@ button:active {
     color: #6c757d;
 }
 
-#monaco {
-    margin: 0;
-    height: 100%;
-    width: 100%;
-}
 
 #resetBtn {
     background-color: #708090;
